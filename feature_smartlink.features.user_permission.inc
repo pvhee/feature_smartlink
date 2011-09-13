@@ -15,7 +15,9 @@ function feature_smartlink_user_default_permissions() {
   // Exported permission: apply to smartlinks
   $permissions['apply to smartlinks'] = array(
     'name' => 'apply to smartlinks',
-    'roles' => array(),
+    'roles' => array(
+      '0' => 'authenticated user',
+    ),
   );
 
   // Exported permission: delete any smartlink content

@@ -4253,6 +4253,22 @@ function feature_smartlink_views_default_views() {
       'me_validate_user_restrict_roles' => 0,
     ),
   ));
+  $handler->override_option('filters', array(
+    'status' => array(
+      'operator' => '=',
+      'value' => '1',
+      'group' => '0',
+      'exposed' => FALSE,
+      'expose' => array(
+        'operator' => FALSE,
+        'label' => '',
+      ),
+      'id' => 'status',
+      'table' => 'users',
+      'field' => 'status',
+      'relationship' => 'none',
+    ),
+  ));
   $handler->override_option('access', array(
     'type' => 'perm',
     'perm' => 'apply to smartlinks',
@@ -4272,15 +4288,27 @@ function feature_smartlink_views_default_views() {
     'weight' => 0,
     'name' => 'navigation',
   ));
-  $handler = $view->new_display('feed', 'Feed', 'feed_1');
-  $handler->override_option('items_per_page', 0);
-  $handler->override_option('style_plugin', 'views_csv');
+  $handler = $view->new_display('views_data_export', 'Data export CSV', 'views_data_export_1');
+  $handler->override_option('items_per_page', '0');
+  $handler->override_option('style_plugin', 'views_data_export_csv');
   $handler->override_option('style_options', array(
     'mission_description' => FALSE,
     'description' => '',
+    'attach_text' => 'CSV',
+    'provide_file' => 1,
+    'filename' => '%1-title.csv',
+    'help' => '',
+    'parent_sort' => 1,
+    'separator' => ',',
+    'quote' => 1,
+    'trim' => 0,
+    'replace_newlines' => 0,
+    'newline_replacement' => ', ',
+    'header' => 1,
+    'encoding' => '',
   ));
   $handler->override_option('row_plugin', '');
-  $handler->override_option('path', 'node/%/report/report.csv');
+  $handler->override_option('path', 'node/%/report/csv');
   $handler->override_option('menu', array(
     'type' => 'none',
     'title' => '',
@@ -4301,6 +4329,44 @@ function feature_smartlink_views_default_views() {
     'page_2' => 0,
   ));
   $handler->override_option('sitename_title', FALSE);
+  $handler->override_option('use_batch', '0');
+  $handler = $view->new_display('views_data_export', 'Data export XML', 'views_data_export_2');
+  $handler->override_option('items_per_page', '0');
+  $handler->override_option('style_plugin', 'views_data_export_xml');
+  $handler->override_option('style_options', array(
+    'mission_description' => FALSE,
+    'description' => '',
+    'attach_text' => 'XML',
+    'provide_file' => 1,
+    'filename' => '%1-title.xml',
+    'help' => '',
+    'parent_sort' => 1,
+    'transform' => 1,
+    'transform_type' => 'underline',
+  ));
+  $handler->override_option('row_plugin', '');
+  $handler->override_option('path', 'node/%/report/xml');
+  $handler->override_option('menu', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('tab_options', array(
+    'type' => 'none',
+    'title' => '',
+    'description' => '',
+    'weight' => 0,
+    'name' => 'navigation',
+  ));
+  $handler->override_option('displays', array(
+    'page_1' => 'page_1',
+    'default' => 0,
+    'page_2' => 0,
+  ));
+  $handler->override_option('sitename_title', FALSE);
+  $handler->override_option('use_batch', '0');
 
   $views[$view->name] = $view;
 
