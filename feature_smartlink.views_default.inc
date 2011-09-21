@@ -99,6 +99,74 @@ function feature_smartlink_views_default_views() {
       'field' => 'percent',
       'relationship' => 'none',
     ),
+    'applied' => array(
+      'label' => 'Applied',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'type' => 'yes-no',
+      'not' => 0,
+      'exclude' => 0,
+      'id' => 'applied',
+      'table' => 'smartlink',
+      'field' => 'applied',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'changed' => array(
+      'label' => 'Date',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'date_format' => 'time ago',
+      'custom_date_format' => '',
+      'exclude' => 0,
+      'id' => 'changed',
+      'table' => 'smartlink',
+      'field' => 'changed',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
     'field_pp_sd_100_yard_dash_value' => array(
       'label' => '100 Yard Dash',
       'alter' => array(
@@ -3479,6 +3547,40 @@ function feature_smartlink_views_default_views() {
       'field' => 'field_pp_years_lived_us_value',
       'relationship' => 'content_profile_rel_1',
     ),
+    'invited' => array(
+      'label' => 'Invited',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'type' => 'yes-no',
+      'not' => 0,
+      'exclude' => 0,
+      'id' => 'invited',
+      'table' => 'smartlink',
+      'field' => 'invited',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
   ));
   $handler->override_option('sorts', array(
     'percent' => array(
@@ -3618,6 +3720,62 @@ function feature_smartlink_views_default_views() {
       'id' => 'percent',
       'table' => 'smartlink',
       'field' => 'percent',
+      'relationship' => 'none',
+    ),
+    'applied' => array(
+      'operator' => '=',
+      'value' => 'All',
+      'group' => '0',
+      'exposed' => TRUE,
+      'expose' => array(
+        'operator' => '',
+        'identifier' => 'applied',
+        'label' => 'Applied',
+        'bef_filter_description' => '',
+        'bef_format' => 'default',
+        'optional' => 1,
+        'remember' => 0,
+        'vfs_selective' => 0,
+        'vfs_active' => 0,
+        'vfs_field' => '0',
+        'vfs_hide_empty' => 0,
+        'bef_select_all_none' => 0,
+        'bef_collapsible' => 0,
+      ),
+      'id' => 'applied',
+      'table' => 'smartlink',
+      'field' => 'applied',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
+    ),
+    'invited' => array(
+      'operator' => '=',
+      'value' => 'All',
+      'group' => '0',
+      'exposed' => TRUE,
+      'expose' => array(
+        'operator' => '',
+        'identifier' => 'invited',
+        'label' => 'Invited',
+        'bef_filter_description' => '',
+        'bef_format' => 'default',
+        'optional' => 1,
+        'remember' => 0,
+        'vfs_selective' => 0,
+        'vfs_active' => 0,
+        'vfs_field' => '0',
+        'vfs_hide_empty' => 0,
+        'bef_select_all_none' => 0,
+        'bef_collapsible' => 0,
+      ),
+      'id' => 'invited',
+      'table' => 'smartlink',
+      'field' => 'invited',
+      'override' => array(
+        'button' => 'Override',
+      ),
       'relationship' => 'none',
     ),
   ));
@@ -4057,6 +4215,466 @@ function feature_smartlink_views_default_views() {
     'default' => '-1',
   ));
   $handler = $view->new_display('page', 'Report', 'page_1');
+  $handler->override_option('style_plugin', 'bulk');
+  $handler->override_option('style_options', array(
+    'grouping' => '',
+    'override' => 1,
+    'sticky' => 0,
+    'order' => 'asc',
+    'columns' => array(
+      'name' => 'name',
+      'percent' => 'percent',
+      'applied' => 'applied',
+      'changed' => 'changed',
+      'field_pp_sd_100_yard_dash_value' => 'field_pp_sd_100_yard_dash_value',
+      'field_pp_sts_act_value' => 'field_pp_sts_act_value',
+      'field_pp_cp_interested_academics_value' => 'field_pp_cp_interested_academics_value',
+      'field_b_cd_active_status_reports_fid' => 'field_b_cd_active_status_reports_fid',
+      'field_pp_address_lid' => 'field_pp_address_lid',
+      'field_pp_cp_full_time_student_value' => 'field_pp_cp_full_time_student_value',
+      'field_pp_cp_college_housing_value' => 'field_pp_cp_college_housing_value',
+      'field_pp_cp_degree_program_value' => 'field_pp_cp_degree_program_value',
+      'field_pp_cp_financial_aid_value' => 'field_pp_cp_financial_aid_value',
+      'field_pp_cp_merit_scholarship_value' => 'field_pp_cp_merit_scholarship_value',
+      'field_b_cd_articles_incorp_nid' => 'field_b_cd_articles_incorp_nid',
+      'field_b_cd_assumed_names_reg_fid' => 'field_b_cd_assumed_names_reg_fid',
+      'field_b_cd_assumed_names_value' => 'field_b_cd_assumed_names_value',
+      'field_pp_sd_bench_press_value' => 'field_pp_sd_bench_press_value',
+      'field_pp_birth_certificate_fid' => 'field_pp_birth_certificate_fid',
+      'field_pp_birth_date_value' => 'field_pp_birth_date_value',
+      'field_pp_birthplace_value' => 'field_pp_birthplace_value',
+      'field_b_cd_bylaws_nid' => 'field_b_cd_bylaws_nid',
+      'field_b_cd_call_option_agr_fid' => 'field_b_cd_call_option_agr_fid',
+      'field_pp_cp_interested_careers_value' => 'field_pp_cp_interested_careers_value',
+      'field_pp_cell_phone_value' => 'field_pp_cell_phone_value',
+      'field_b_cd_cert_good_standing_fid' => 'field_b_cd_cert_good_standing_fid',
+      'field_pp_children_uid' => 'field_pp_children_uid',
+      'field_pp_citizen_status_value' => 'field_pp_citizen_status_value',
+      'field_pp_ca_college_uid' => 'field_pp_ca_college_uid',
+      'field_pp_ca_class_rank_value' => 'field_pp_ca_class_rank_value',
+      'field_pp_ca_class_size_value' => 'field_pp_ca_class_size_value',
+      'field_pp_ca_gpa_value' => 'field_pp_ca_gpa_value',
+      'field_pp_ca_graduation_year_value' => 'field_pp_ca_graduation_year_value',
+      'field_pp_ca_honors_value' => 'field_pp_ca_honors_value',
+      'field_pp_ca_report_cards_fid' => 'field_pp_ca_report_cards_fid',
+      'field_pp_cp_interested_schools_uid' => 'field_pp_cp_interested_schools_uid',
+      'field_b_cd_convert_securities_fid' => 'field_b_cd_convert_securities_fid',
+      'field_pp_job_date_value' => 'field_pp_job_date_value',
+      'field_pp_job_description_value' => 'field_pp_job_description_value',
+      'field_pp_documents_view_vname' => 'field_pp_documents_view_vname',
+      'field_pp_email_email' => 'field_pp_email_email',
+      'field_pp_cp_entry_plans_value' => 'field_pp_cp_entry_plans_value',
+      'field_pp_first_language_value' => 'field_pp_first_language_value',
+      'field_pp_firstname_value' => 'field_pp_firstname_value',
+      'field_pp_games_view_vname' => 'field_pp_games_view_vname',
+      'field_pp_gender_value' => 'field_pp_gender_value',
+      'field_pp_sd_height_value' => 'field_pp_sd_height_value',
+      'field_pp_a_high_school_uid' => 'field_pp_a_high_school_uid',
+      'field_pp_a_hs_class_rank_value' => 'field_pp_a_hs_class_rank_value',
+      'field_pp_a_hs_class_size_value' => 'field_pp_a_hs_class_size_value',
+      'field_pp_a_hs_gpa_value' => 'field_pp_a_hs_gpa_value',
+      'field_pp_a_hs_graduation_year_value' => 'field_pp_a_hs_graduation_year_value',
+      'field_pp_a_hs_honors_value' => 'field_pp_a_hs_honors_value',
+      'field_pp_a_hs_report_cards_fid' => 'field_pp_a_hs_report_cards_fid',
+      'field_pp_cp_highest_degree_value' => 'field_pp_cp_highest_degree_value',
+      'field_pp_job_name_value' => 'field_pp_job_name_value',
+      'field_pp_home_language_value' => 'field_pp_home_language_value',
+      'field_pp_lastname_value' => 'field_pp_lastname_value',
+      'field_pp_marital_status_value' => 'field_pp_marital_status_value',
+      'field_pp_mr_docs_fid' => 'field_pp_mr_docs_fid',
+      'field_pp_middlename_value' => 'field_pp_middlename_value',
+      'field_pp_military_status_value' => 'field_pp_military_status_value',
+      'field_b_cd_minute_book_fid' => 'field_b_cd_minute_book_fid',
+      'field_b_cd_oper_agreements_nid' => 'field_b_cd_oper_agreements_nid',
+      'field_b_cd_org_chart_fid' => 'field_b_cd_org_chart_fid',
+      'field_b_cd_outstand_pstock_fid' => 'field_b_cd_outstand_pstock_fid',
+      'field_pp_parents_uid' => 'field_pp_parents_uid',
+      'field_pp_parent_marital_status_value' => 'field_pp_parent_marital_status_value',
+      'field_pp_permanent_parents_uid' => 'field_pp_permanent_parents_uid',
+      'field_pp_phone_value' => 'field_pp_phone_value',
+      'field_pp_photos_view_vname' => 'field_pp_photos_view_vname',
+      'field_pp_profile_picture_fid' => 'field_pp_profile_picture_fid',
+      'field_pp_pin_value' => 'field_pp_pin_value',
+      'field_pp_sd_positions_played_nid' => 'field_pp_sd_positions_played_nid',
+      'field_b_cd_put_option_agr_fid' => 'field_b_cd_put_option_agr_fid',
+      'field_pp_race_value' => 'field_pp_race_value',
+      'field_pp_sts_sat_value' => 'field_pp_sts_sat_value',
+      'field_pp_scrapbook_view_vname' => 'field_pp_scrapbook_view_vname',
+      'field_b_cd_shareholders_nid' => 'field_b_cd_shareholders_nid',
+      'field_pp_siblings_uid' => 'field_pp_siblings_uid',
+      'field_pp_social_security_number_value' => 'field_pp_social_security_number_value',
+      'field_b_cd_states_auth_business_value' => 'field_b_cd_states_auth_business_value',
+      'field_b_cd_states_maint_employee_value' => 'field_b_cd_states_maint_employee_value',
+      'field_b_cd_states_own_property_value' => 'field_b_cd_states_own_property_value',
+      'field_b_cd_stock_certs_fid' => 'field_b_cd_stock_certs_fid',
+      'field_b_cd_subscription_agr_fid' => 'field_b_cd_subscription_agr_fid',
+      'field_pp_sts_toefl_value' => 'field_pp_sts_toefl_value',
+      'field_pp_sd_vertical_leap_value' => 'field_pp_sd_vertical_leap_value',
+      'field_pp_videos_view_vname' => 'field_pp_videos_view_vname',
+      'field_b_cd_vote_trust_agr_fid' => 'field_b_cd_vote_trust_agr_fid',
+      'field_b_cd_warrant_agr_fid' => 'field_b_cd_warrant_agr_fid',
+      'field_pp_sd_weight_value' => 'field_pp_sd_weight_value',
+      'field_pp_sd_wing_span_value' => 'field_pp_sd_wing_span_value',
+      'field_pp_years_lived_us_value' => 'field_pp_years_lived_us_value',
+    ),
+    'info' => array(
+      'name' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'percent' => array(
+        'sortable' => 1,
+        'separator' => '',
+      ),
+      'applied' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'changed' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_sd_100_yard_dash_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_sts_act_value' => array(
+        'separator' => '',
+      ),
+      'field_pp_cp_interested_academics_value' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_active_status_reports_fid' => array(
+        'separator' => '',
+      ),
+      'field_pp_address_lid' => array(
+        'separator' => '',
+      ),
+      'field_pp_cp_full_time_student_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_cp_college_housing_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_cp_degree_program_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_cp_financial_aid_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_cp_merit_scholarship_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_b_cd_articles_incorp_nid' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_assumed_names_reg_fid' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_assumed_names_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_sd_bench_press_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_birth_certificate_fid' => array(
+        'separator' => '',
+      ),
+      'field_pp_birth_date_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_birthplace_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_b_cd_bylaws_nid' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_call_option_agr_fid' => array(
+        'separator' => '',
+      ),
+      'field_pp_cp_interested_careers_value' => array(
+        'separator' => '',
+      ),
+      'field_pp_cell_phone_value' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_cert_good_standing_fid' => array(
+        'separator' => '',
+      ),
+      'field_pp_children_uid' => array(
+        'separator' => '',
+      ),
+      'field_pp_citizen_status_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_ca_college_uid' => array(
+        'separator' => '',
+      ),
+      'field_pp_ca_class_rank_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_ca_class_size_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_ca_gpa_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_ca_graduation_year_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_ca_honors_value' => array(
+        'separator' => '',
+      ),
+      'field_pp_ca_report_cards_fid' => array(
+        'separator' => '',
+      ),
+      'field_pp_cp_interested_schools_uid' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_convert_securities_fid' => array(
+        'separator' => '',
+      ),
+      'field_pp_job_date_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_job_description_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_documents_view_vname' => array(
+        'separator' => '',
+      ),
+      'field_pp_email_email' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_cp_entry_plans_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_first_language_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_firstname_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_games_view_vname' => array(
+        'separator' => '',
+      ),
+      'field_pp_gender_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_sd_height_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_a_high_school_uid' => array(
+        'separator' => '',
+      ),
+      'field_pp_a_hs_class_rank_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_a_hs_class_size_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_a_hs_gpa_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_a_hs_graduation_year_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_a_hs_honors_value' => array(
+        'separator' => '',
+      ),
+      'field_pp_a_hs_report_cards_fid' => array(
+        'separator' => '',
+      ),
+      'field_pp_cp_highest_degree_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_job_name_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_home_language_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_lastname_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_marital_status_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_mr_docs_fid' => array(
+        'separator' => '',
+      ),
+      'field_pp_middlename_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_military_status_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_b_cd_minute_book_fid' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_oper_agreements_nid' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_org_chart_fid' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_outstand_pstock_fid' => array(
+        'separator' => '',
+      ),
+      'field_pp_parents_uid' => array(
+        'separator' => '',
+      ),
+      'field_pp_parent_marital_status_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_permanent_parents_uid' => array(
+        'separator' => '',
+      ),
+      'field_pp_phone_value' => array(
+        'separator' => '',
+      ),
+      'field_pp_photos_view_vname' => array(
+        'separator' => '',
+      ),
+      'field_pp_profile_picture_fid' => array(
+        'separator' => '',
+      ),
+      'field_pp_pin_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_sd_positions_played_nid' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_put_option_agr_fid' => array(
+        'separator' => '',
+      ),
+      'field_pp_race_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_sts_sat_value' => array(
+        'separator' => '',
+      ),
+      'field_pp_scrapbook_view_vname' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_shareholders_nid' => array(
+        'separator' => '',
+      ),
+      'field_pp_siblings_uid' => array(
+        'separator' => '',
+      ),
+      'field_pp_social_security_number_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_b_cd_states_auth_business_value' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_states_maint_employee_value' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_states_own_property_value' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_stock_certs_fid' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_subscription_agr_fid' => array(
+        'separator' => '',
+      ),
+      'field_pp_sts_toefl_value' => array(
+        'separator' => '',
+      ),
+      'field_pp_sd_vertical_leap_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_videos_view_vname' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_vote_trust_agr_fid' => array(
+        'separator' => '',
+      ),
+      'field_b_cd_warrant_agr_fid' => array(
+        'separator' => '',
+      ),
+      'field_pp_sd_weight_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_sd_wing_span_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'field_pp_years_lived_us_value' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+    ),
+    'default' => '-1',
+    'execution_type' => '1',
+    'display_type' => '0',
+    'hide_select_all' => 0,
+    'skip_confirmation' => 0,
+    'display_result' => 1,
+    'merge_single_action' => 1,
+    'selected_operations' => array(
+      'views_bulk_operations_ruleset_action_rules_smartlink_ruleset_invite_user' => 'views_bulk_operations_ruleset_action_rules_smartlink_ruleset_invite_user',
+      'user_block_ip_action' => 0,
+      'user_block_user_action' => 0,
+      'user_user_operations_block' => 0,
+      'views_bulk_operations_delete_user_action' => 0,
+      'system_message_action' => 0,
+      'token_actions_message_action' => 0,
+      'views_bulk_operations_action' => 0,
+      'views_bulk_operations_script_action' => 0,
+      'views_bulk_operations_user_roles_action' => 0,
+      'views_bulk_operations_argument_selector_action' => 0,
+      'token_actions_goto_action' => 0,
+      'system_goto_action' => 0,
+      'mimemail_send_mail_action' => 0,
+      'system_send_email_action' => 0,
+      'token_actions_send_email_action' => 0,
+      'user_user_operations_unblock' => 0,
+      'pathauto_user_update_alias_multiple:620e193b20ba9caa374fea9ca0ad38f0' => 0,
+    ),
+  ));
   $handler->override_option('path', 'node/%/report');
   $handler->override_option('menu', array(
     'type' => 'tab',
@@ -4367,6 +4985,196 @@ function feature_smartlink_views_default_views() {
   ));
   $handler->override_option('sitename_title', FALSE);
   $handler->override_option('use_batch', '0');
+
+  $views[$view->name] = $view;
+
+  // Exported view: smartlink_users_list
+  $view = new view;
+  $view->name = 'smartlink_users_list';
+  $view->description = '';
+  $view->tag = '';
+  $view->view_php = '';
+  $view->base_table = 'users';
+  $view->is_cacheable = FALSE;
+  $view->api_version = 2;
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+  $handler = $view->new_display('default', 'Defaults', 'default');
+  $handler->override_option('fields', array(
+    'name' => array(
+      'label' => 'Name',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'link_to_user' => 1,
+      'overwrite_anonymous' => 0,
+      'anonymous_text' => '',
+      'exclude' => 0,
+      'id' => 'name',
+      'table' => 'users',
+      'field' => 'name',
+      'relationship' => 'none',
+    ),
+    'percent' => array(
+      'label' => 'Score',
+      'alter' => array(
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'display_as' => 'bar',
+      'exclude' => 0,
+      'id' => 'percent',
+      'table' => 'smartlink',
+      'field' => 'percent',
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('arguments', array(
+    'nid' => array(
+      'default_action' => 'default',
+      'style_plugin' => 'default_summary',
+      'style_options' => array(),
+      'wildcard' => 'all',
+      'wildcard_substitution' => 'All',
+      'title' => '',
+      'breadcrumb' => '',
+      'default_argument_type' => 'node',
+      'default_argument' => '',
+      'validate_type' => 'none',
+      'validate_fail' => 'not found',
+      'break_phrase' => 0,
+      'not' => 0,
+      'smartlink_fields_limit' => 0,
+      'id' => 'nid',
+      'table' => 'smartlink',
+      'field' => 'nid',
+      'validate_user_argument_type' => 'uid',
+      'validate_user_roles' => array(
+        '2' => 0,
+        '11' => 0,
+        '8' => 0,
+        '12' => 0,
+        '13' => 0,
+        '4' => 0,
+        '9' => 0,
+        '3' => 0,
+        '10' => 0,
+      ),
+      'relationship' => 'none',
+      'default_options_div_prefix' => '',
+      'default_argument_fixed' => '',
+      'default_argument_user' => 0,
+      'default_argument_php' => '',
+      'validate_argument_node_type' => array(
+        'smartlink' => 0,
+        'panel' => 0,
+        'articles_of_incorporation' => 0,
+        'audio_scrapbook' => 0,
+        'basketball_scorecard' => 0,
+        'business_application' => 0,
+        'business_profile' => 0,
+        'business_registration' => 0,
+        'bylaws' => 0,
+        'celebration' => 0,
+        'document_scrapbook' => 0,
+        'family' => 0,
+        'golf_scorecard' => 0,
+        'home_page' => 0,
+        'icon' => 0,
+        'operating_agreement' => 0,
+        'page' => 0,
+        'personal_application' => 0,
+        'personal_profile' => 0,
+        'personal_registration' => 0,
+        'photo_scrapbook' => 0,
+        'profile' => 0,
+        'shareholder' => 0,
+        'sport' => 0,
+        'sport_position' => 0,
+        'story' => 0,
+        'talent' => 0,
+        'uprofile' => 0,
+        'video_scrapbook' => 0,
+      ),
+      'validate_argument_node_access' => 0,
+      'validate_argument_nid_type' => 'nid',
+      'validate_argument_vocabulary' => array(),
+      'validate_argument_type' => 'tid',
+      'validate_argument_transform' => 0,
+      'validate_user_restrict_roles' => 0,
+      'validate_argument_php' => '',
+    ),
+  ));
+  $handler->override_option('access', array(
+    'type' => 'perm',
+    'perm' => 'edit own smartlink content',
+  ));
+  $handler->override_option('cache', array(
+    'type' => 'none',
+  ));
+  $handler->override_option('empty', 'You need to run this smartlink over all users first to see results.');
+  $handler->override_option('empty_format', '1');
+  $handler->override_option('use_more', 0);
+  $handler->override_option('use_more_always', 0);
+  $handler->override_option('use_more_text', 'More options');
+  $handler->override_option('style_plugin', 'table');
+  $handler->override_option('style_options', array(
+    'grouping' => '',
+    'override' => 1,
+    'sticky' => 0,
+    'order' => 'asc',
+    'columns' => array(
+      'name' => 'name',
+      'percent' => 'percent',
+    ),
+    'info' => array(
+      'name' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+      'percent' => array(
+        'sortable' => 0,
+        'separator' => '',
+      ),
+    ),
+    'default' => '-1',
+  ));
+  $handler = $view->new_display('block', 'Block', 'block_1');
+  $handler->override_option('block_description', '');
+  $handler->override_option('block_caching', -1);
 
   $views[$view->name] = $view;
 

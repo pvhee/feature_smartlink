@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * Install schema.
+ */
+function feature_smartlink_update_6001() {
+  $return = array();
+  $modules = array('context', 'context_ui');
+  drupal_install_modules($modules);
+  $return[] = array('success' => TRUE, 'query' => 'Enabling modules: '. implode(', ', $modules));
+  return $return;
+}
