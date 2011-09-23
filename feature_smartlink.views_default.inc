@@ -5903,7 +5903,7 @@ function feature_smartlink_views_default_views() {
         'word_boundary' => 1,
         'ellipsis' => 1,
         'html' => 0,
-        'strip_tags' => 0,
+        'strip_tags' => 1,
       ),
       'empty' => '',
       'hide_empty' => 0,
@@ -5922,6 +5922,9 @@ function feature_smartlink_views_default_views() {
       'table' => 'node_data_field_pp_address',
       'field' => 'field_pp_address_lid',
       'relationship' => 'content_profile_rel_1',
+      'override' => array(
+        'button' => 'Use default',
+      ),
     ),
     'field_pp_cp_full_time_student_value' => array(
       'label' => 'Apply as Full Time Student',
@@ -8257,14 +8260,14 @@ function feature_smartlink_views_default_views() {
         'word_boundary' => 1,
         'ellipsis' => 1,
         'html' => 0,
-        'strip_tags' => 0,
+        'strip_tags' => 1,
       ),
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
       'link_to_node' => 0,
       'label_type' => 'widget',
-      'format' => 'default',
+      'format' => 'url_plain',
       'multiple' => array(
         'group' => TRUE,
         'multiple_number' => '',
@@ -8276,6 +8279,9 @@ function feature_smartlink_views_default_views() {
       'table' => 'node_data_field_pp_profile_picture',
       'field' => 'field_pp_profile_picture_fid',
       'relationship' => 'content_profile_rel_1',
+      'override' => array(
+        'button' => 'Use default',
+      ),
     ),
     'field_pp_pin_value' => array(
       'label' => 'Pin',
