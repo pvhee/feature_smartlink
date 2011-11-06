@@ -10,3 +10,14 @@ function feature_smartlink_update_6001() {
   $return[] = array('success' => TRUE, 'query' => 'Enabling modules: '. implode(', ', $modules));
   return $return;
 }
+
+/**
+ * Install views_php.
+ */
+function feature_smartlink_update_6002() {
+  $return = array();
+  $modules = array('views_php');
+  drupal_install_modules($modules);
+  $return[] = array('success' => TRUE, 'query' => 'Enabling modules: '. implode(', ', $modules));
+  return $return;
+}

@@ -9,22 +9,40 @@ function feature_smartlink_views_default_views() {
   // Exported view: smartlink_invitations
   $view = new view;
   $view->name = 'smartlink_invitations';
-  $view->description = '';
+  $view->description = 'List of of users\' smartlink with application information';
   $view->tag = '';
   $view->view_php = '';
-  $view->base_table = 'users';
+  $view->base_table = 'smartlink';
   $view->is_cacheable = FALSE;
   $view->api_version = 2;
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
   $handler = $view->new_display('default', 'Defaults', 'default');
+  $handler->override_option('relationships', array(
+    'nid' => array(
+      'label' => 'Node',
+      'required' => 0,
+      'id' => 'nid',
+      'table' => 'smartlink',
+      'field' => 'nid',
+      'relationship' => 'none',
+    ),
+    'uid' => array(
+      'label' => 'Users',
+      'required' => 0,
+      'id' => 'uid',
+      'table' => 'smartlink',
+      'field' => 'uid',
+      'relationship' => 'none',
+    ),
+  ));
   $handler->override_option('fields', array(
     'nid' => array(
-      'label' => 'Smartlink',
+      'label' => 'Smartlink nid',
       'alter' => array(
         'alter_text' => 0,
-        'text' => 'View smartlink',
+        'text' => '',
         'make_link' => 0,
-        'path' => 'node/[nid]',
+        'path' => '',
         'link_class' => '',
         'alt' => '',
         'prefix' => '',
@@ -53,12 +71,13 @@ function feature_smartlink_views_default_views() {
       'field' => 'nid',
       'relationship' => 'none',
     ),
-    'nothing_2' => array(
-      'label' => 'Smartlink',
+    'applied' => array(
+      'label' => 'Applied',
       'alter' => array(
-        'text' => 'View smartlink',
-        'make_link' => 1,
-        'path' => 'node/[nid]',
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
         'link_class' => '',
         'alt' => '',
         'prefix' => '',
@@ -75,11 +94,43 @@ function feature_smartlink_views_default_views() {
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
-      'exclude' => 0,
-      'id' => 'nothing_2',
-      'table' => 'views',
-      'field' => 'nothing',
+      'type' => 'yes-no',
+      'not' => 0,
+      'exclude' => 1,
+      'id' => 'applied',
+      'table' => 'smartlink',
+      'field' => 'applied',
       'relationship' => 'none',
+    ),
+    'title' => array(
+      'label' => 'Smartlink',
+      'alter' => array(
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
+        'link_class' => '',
+        'alt' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'target' => '',
+        'help' => '',
+        'trim' => 0,
+        'max_length' => '',
+        'word_boundary' => 1,
+        'ellipsis' => 1,
+        'html' => 0,
+        'strip_tags' => 0,
+      ),
+      'empty' => '',
+      'hide_empty' => 0,
+      'empty_zero' => 0,
+      'link_to_node' => 1,
+      'exclude' => 0,
+      'id' => 'title',
+      'table' => 'node',
+      'field' => 'title',
+      'relationship' => 'nid',
     ),
     'created' => array(
       'label' => 'Application date',
@@ -110,37 +161,6 @@ function feature_smartlink_views_default_views() {
       'id' => 'created',
       'table' => 'smartlink',
       'field' => 'created',
-      'relationship' => 'none',
-    ),
-    'applied' => array(
-      'label' => 'Applied',
-      'alter' => array(
-        'alter_text' => 0,
-        'text' => '',
-        'make_link' => 0,
-        'path' => '',
-        'link_class' => '',
-        'alt' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'target' => '',
-        'help' => '',
-        'trim' => 0,
-        'max_length' => '',
-        'word_boundary' => 1,
-        'ellipsis' => 1,
-        'html' => 0,
-        'strip_tags' => 0,
-      ),
-      'empty' => '',
-      'hide_empty' => 0,
-      'empty_zero' => 0,
-      'type' => 'yes-no',
-      'not' => 0,
-      'exclude' => 0,
-      'id' => 'applied',
-      'table' => 'smartlink',
-      'field' => 'applied',
       'relationship' => 'none',
     ),
     'invited' => array(
@@ -174,12 +194,13 @@ function feature_smartlink_views_default_views() {
       'field' => 'invited',
       'relationship' => 'none',
     ),
-    'nothing' => array(
-      'label' => 'Apply',
+    'php' => array(
+      'label' => 'Status',
       'alter' => array(
-        'text' => 'Apply',
-        'make_link' => 1,
-        'path' => 'node/[nid]/apply',
+        'alter_text' => 0,
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
         'link_class' => '',
         'alt' => '',
         'prefix' => '',
@@ -196,18 +217,24 @@ function feature_smartlink_views_default_views() {
       'empty' => '',
       'hide_empty' => 0,
       'empty_zero' => 0,
+      'use_php_setup' => 0,
+      'php_setup' => '',
+      'php_value' => '',
+      'php_output' => '<?php print ($row->applied) ? l(t(\'Update\'),\'node/\'.$row->nid.\'/apply\') : l(t(\'Apply\'),\'node/\'.$row->nid.\'/apply\'); ?>',
+      'use_php_click_sortable' => '0',
+      'php_click_sortable' => '',
       'exclude' => 0,
-      'id' => 'nothing',
+      'id' => 'php',
       'table' => 'views',
-      'field' => 'nothing',
+      'field' => 'php',
       'relationship' => 'none',
     ),
-    'nothing_1' => array(
-      'label' => 'Application',
+    'percent' => array(
+      'label' => 'Percent',
       'alter' => array(
-        'text' => 'My application',
-        'make_link' => 1,
-        'path' => 'node/[nid]/application',
+        'text' => '',
+        'make_link' => 0,
+        'path' => '',
         'link_class' => '',
         'alt' => '',
         'prefix' => '',
@@ -222,16 +249,30 @@ function feature_smartlink_views_default_views() {
         'strip_tags' => 0,
       ),
       'empty' => '',
-      'hide_empty' => 0,
+      'hide_empty' => 1,
       'empty_zero' => 0,
+      'display_as' => 'bar',
       'exclude' => 0,
-      'id' => 'nothing_1',
-      'table' => 'views',
-      'field' => 'nothing',
-      'relationship' => 'none',
+      'id' => 'percent',
+      'table' => 'smartlink',
+      'field' => 'percent',
       'override' => array(
         'button' => 'Override',
       ),
+      'relationship' => 'none',
+    ),
+  ));
+  $handler->override_option('sorts', array(
+    'changed' => array(
+      'order' => 'DESC',
+      'granularity' => 'second',
+      'id' => 'changed',
+      'table' => 'smartlink',
+      'field' => 'changed',
+      'override' => array(
+        'button' => 'Override',
+      ),
+      'relationship' => 'none',
     ),
   ));
   $handler->override_option('arguments', array(
@@ -250,19 +291,12 @@ function feature_smartlink_views_default_views() {
       'break_phrase' => 0,
       'not' => 0,
       'id' => 'uid',
-      'table' => 'users',
+      'table' => 'smartlink',
       'field' => 'uid',
       'validate_user_argument_type' => 'uid',
       'validate_user_roles' => array(
         '2' => 0,
-        '11' => 0,
-        '8' => 0,
-        '12' => 0,
-        '13' => 0,
-        '4' => 0,
-        '9' => 0,
         '3' => 0,
-        '10' => 0,
       ),
       'relationship' => 'none',
       'default_options_div_prefix' => '',
@@ -270,39 +304,21 @@ function feature_smartlink_views_default_views() {
       'default_argument_user' => 0,
       'default_argument_php' => '',
       'validate_argument_node_type' => array(
-        'smartlink' => 0,
-        'panel' => 0,
-        'articles_of_incorporation' => 0,
-        'audio_scrapbook' => 0,
-        'basketball_scorecard' => 0,
-        'business_application' => 0,
-        'business_profile' => 0,
-        'business_registration' => 0,
-        'bylaws' => 0,
-        'celebration' => 0,
-        'document_scrapbook' => 0,
-        'family' => 0,
-        'golf_scorecard' => 0,
-        'home_page' => 0,
-        'icon' => 0,
-        'operating_agreement' => 0,
+        'ad' => 0,
+        'business' => 0,
+        'invite' => 0,
         'page' => 0,
-        'personal_application' => 0,
-        'personal_profile' => 0,
-        'personal_registration' => 0,
-        'photo_scrapbook' => 0,
+        'personal' => 0,
         'profile' => 0,
-        'shareholder' => 0,
-        'sport' => 0,
-        'sport_position' => 0,
+        'smartlink' => 0,
         'story' => 0,
-        'talent' => 0,
-        'uprofile' => 0,
-        'video_scrapbook' => 0,
       ),
       'validate_argument_node_access' => 0,
       'validate_argument_nid_type' => 'nid',
-      'validate_argument_vocabulary' => array(),
+      'validate_argument_vocabulary' => array(
+        '1' => 0,
+        '2' => 0,
+      ),
       'validate_argument_type' => 'tid',
       'validate_argument_transform' => 0,
       'validate_user_restrict_roles' => 0,
@@ -312,29 +328,13 @@ function feature_smartlink_views_default_views() {
       ),
     ),
   ));
-  $handler->override_option('filters', array(
-    'invited' => array(
-      'operator' => '=',
-      'value' => '1',
-      'group' => '0',
-      'exposed' => FALSE,
-      'expose' => array(
-        'operator' => FALSE,
-        'label' => '',
-      ),
-      'id' => 'invited',
-      'table' => 'smartlink',
-      'field' => 'invited',
-      'relationship' => 'none',
-    ),
-  ));
   $handler->override_option('access', array(
     'type' => 'none',
   ));
   $handler->override_option('cache', array(
     'type' => 'none',
   ));
-  $handler->override_option('title', 'My invitations');
+  $handler->override_option('use_pager', '1');
   $handler->override_option('style_plugin', 'table');
   $handler->override_option('style_options', array(
     'grouping' => '',
@@ -342,17 +342,16 @@ function feature_smartlink_views_default_views() {
     'sticky' => 0,
     'order' => 'asc',
     'columns' => array(
+      'title' => 'title',
       'created' => 'created',
-      'applied' => 'applied',
       'invited' => 'invited',
-      'name' => 'name',
     ),
     'info' => array(
-      'created' => array(
+      'title' => array(
         'sortable' => 0,
         'separator' => '',
       ),
-      'applied' => array(
+      'created' => array(
         'sortable' => 0,
         'separator' => '',
       ),
@@ -360,18 +359,15 @@ function feature_smartlink_views_default_views() {
         'sortable' => 0,
         'separator' => '',
       ),
-      'name' => array(
-        'sortable' => 0,
-        'separator' => '',
-      ),
     ),
     'default' => '-1',
   ));
   $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->override_option('title', 'My invitations');
   $handler->override_option('path', 'invitations');
   $handler->override_option('menu', array(
     'type' => 'normal',
-    'title' => 'My Invitations',
+    'title' => 'My invitations',
     'description' => '',
     'weight' => '0',
     'name' => 'primary-links',
